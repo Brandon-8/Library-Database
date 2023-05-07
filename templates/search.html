@@ -1,0 +1,50 @@
+<!--Display search bar and results of the search beneath-->
+{% extends 'base.html' %}
+{% block search %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .center-block {margin: auto; display: block;}
+    form          { display: table;}
+    p             { display: table-row;}
+    label         { display: table-cell;  text-align: right;}
+    p a           { display: table-cell;  text-align: left;}
+    input         { display: table-cell;}
+</style>
+<body>
+    <!--search bar and field (type of search)-->
+    <h1>Search</h1>
+    <form action="search" method="POST">
+        <p>
+            <label for="searchBar">Search:&emsp;</label>
+            <input id="searchBar" name="query" type="text">
+            <button type="submit"> <i class="fa fa-search"></i></button> <br> <br>
+        </p>
+        <p>
+            <label>Search by:&emsp;</label>
+            <select name="field" value="Any Field">
+                <option value="title">Title</option>
+                <option value="author">Author</option>
+                <option value="isbn">ISBN</option>
+            </select> <br> <br>
+        </p>
+        <!--Not enough time to implement additional search parameters/filters-->
+        <!--
+        <p>
+            <label for="blank"></label>
+            <a href="">More Search Options</a>
+            <br> <br>
+        </p>
+        -->
+    </form>
+    <hr>
+    <!--Display Results of the search-->
+    {% if titles != 0 %}
+        <h1>Results</h1>
+        <hr>
+        {% for title in titles %}
+            {% include 'searchResults.html' %}
+        {% endfor %}
+    {% endif %}
+</body>
+
+{% endblock %}

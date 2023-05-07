@@ -1,0 +1,39 @@
+<!--Display Full Page Book info-->
+{% extends 'base.html' %}
+{% block book %}
+<!--Code Adapted from: https://stackoverflow.com/questions/5198392/css-float-floating-an-image-to-the-left-of-the-text-->
+<style>
+    .container {
+        margin: 20px 20px 0 0;  
+        border: 5px solid #333;
+        overflow: auto;
+    }
+    
+    .content {
+        overflow: hidden;
+        padding-left: 10px;
+    }
+</style>
+    <div class="container">
+        <img src={{title[8]}} alt="cover image" style="float: left; display: block;">
+        <div class="content">
+            <h1>{{title[0]}}</h1> 
+            <span style="font-size: 20px">by: <a href="{{ url_for('search', author=authors[0][1]) }}">{{authors[0][0]}}</a>
+                {% for author in authors %}
+                {% if author[1] != authors[0][1] %} <!--Don't repeat 1st author-->
+                 & <a href="{{ url_for('search', author=author[1]) }}">{{author[0]}}</a>
+                {% endif %}
+                {% endfor %} 
+            </span>
+            <p style="font-size: 20px">Summary: {{ title[9] }}</p> 
+            <p style="font-size: 20px">Category: {{ title[7] }}</p>
+            <p style="font-size: 20px">ISBN: {{ title[1] }}</p>
+            <p style="font-size: 20px">ISBN13: {{ title[2] }}</p>
+            <p style="font-size: 20px">Language: {{ title[3] }}</p>
+            <p style="font-size: 20px">Page Count: {{ title[4] }}</p>
+            <p style="font-size: 20px">Publisher: {{ title[10] }}</p>
+            <p style="font-size: 20px">Date: {{ title[5] }}</p>
+        </div>    
+    </div>
+<form method="post"><h2>Availability: {{copies}} <input type="submit" name="hold" value="Place Hold Request"></h2></form>
+{% endblock %}

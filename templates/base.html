@@ -1,0 +1,121 @@
+<!-- Overall layout seen on all pages (titles and links to other pages)-->
+<!--Navigation Bar taken from: https://www.w3schools.com/csS/css_navbar_horizontal.asp-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library System</title>
+    <style>  
+        .head {text-align: center;}
+
+        .alert {
+            padding: 20px;
+            margin: 5px;
+            color: #970020;
+            background-color: #ffd5de;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+           /* position: fixed; */
+            top: 0;
+            width: 100%;
+        }
+
+        li {float: left;}
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {background-color: #111;}       
+        
+        .active {background-color: #04AA6D;}
+
+        li a:hover {background-color: #111;}
+    </style>
+</head>
+<body>
+    <nav>
+        <div>
+            <h1 style="font-size: 40px">Library System</h1>
+        </div>
+    </nav>
+    <hr>
+    <ul>
+
+        {% if activePage == "info" %}
+        <li><a class="active" href="{{url_for('home')}}">Library Info</a></li>
+        {% else %}
+        <li><a href="{{url_for('home')}}">Library Info</a></li>
+        {% endif %}
+
+        {% if activePage == "search" %}
+        <li><a class="active" href="{{url_for('search')}}">Search</a></li>
+        {% else %}
+        <li><a href="{{url_for('search')}}">Search</a></li>
+        {% endif %}
+
+        {% if loginVal %}
+            {% if activePage == "account" %}
+            <li><a class="active" href="{{url_for('account')}}">My Account</a></li>
+            {% else %}
+            <li><a href="{{url_for('account')}}">My Account</a></li>
+            {% endif %}
+        {% else %}
+        <li><a href="{{url_for('login')}}">My Account</a></li>
+        {% endif %}
+
+        {% if loginVal %}
+            {% if activePage == "login" %}
+            <li class="active" style="float:right"><a href="{{url_for('login')}}">Log Out</a></li>
+            {% else %}
+            <li style="float:right"><a href="{{url_for('login')}}">Log Out</a></li>
+            {% endif %}
+        {% else %}
+            {% if activePage == "login" %}
+            <li class="active" style="float:right"><a href="{{url_for('login')}}">Log In</a></li>
+            {% else %}
+            <li style="float:right"><a href="{{url_for('login')}}">Log In</a></li>
+            {% endif %}
+        {% endif %}
+    </ul>
+    <hr>
+    <div>
+        <!--Dispaly flash messages-->
+        {% for message in get_flashed_messages() %}
+            <div class="alert">{{ message }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="home">
+        {% block home %} {% endblock %}
+    </div>
+    <div class="search">
+        {% block search %} {% endblock %}
+    </div>
+    <div class="login">
+        {% block login %} {% endblock %}
+    </div>
+    <div class="account">
+        {% block account %} {% endblock %}
+    </div>
+    <div class="searchResults">
+        {% block searchResults %} {% endblock %}
+    </div>
+    <div class="book">
+        {% block book %} {% endblock %}
+    </div>
+    <div class="resetPassword">
+        {% block resetPassword %} {% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!--Display user's account info-->
+{% extends 'base.html' %}
+{% block account %}
+<style>
+    .container {
+        margin: 20px 20px 0 0;  
+        border: 5px solid #333;
+        overflow: auto;
+    }
+    
+    .content {
+        overflow: hidden;
+        padding-left: 10px;
+    }
+</style>
+<!--Basic user info-->
+<div class="container">
+    <div class="content">
+        <h1>Account Information</h1>
+        <p>Username: {{user[1]}}</p>
+        <p>Email: {{user[2]}}</p>
+        <p>First Name: {{user[3]}}</p>
+        <p>Last Name: {{user[4]}}</p>
+    </div>
+</div>
+<!--List all holds the user placed-->
+<div class="container">
+    <div class="content">
+        <h1>Holds</h1>
+        {% for title in titles %}
+            {% include 'searchResults.html' %}
+            <form method="post"><input type="submit" id="{{title[2]}}" value="Cancel Hold">
+                <input value="{{title[2]}}" type="hidden" name="book"></form>
+        {% endfor %}
+        <br>
+    </div>
+</div>
+{% endblock %}

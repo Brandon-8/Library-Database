@@ -1,0 +1,44 @@
+<!--Display Book, simplified view of Book.html-->
+<!DOCTYPE html>
+<html lang="en">
+<!--Code Adapted from: https://stackoverflow.com/questions/5198392/css-float-floating-an-image-to-the-left-of-the-text-->
+<style>
+    .container {
+        margin: 20px 20px 0 0;  
+        border: 5px solid #333;
+        overflow: auto
+    }
+
+    .content {
+        overflow: hidden;
+        padding-left: 10px;
+    }
+</style>
+<div class="container">
+    <img src={{title[8]}} alt="cover image" style="float: left; display: block;">
+    <div class="content">
+        <h1><a href="{{ url_for('book', title=title[2]) }}">{{title[0]}}</a></h1>
+        <!-- Display all authors for the book--> 
+        <span> 
+            <!--https://stackoverflow.com/questions/9486393/jinja2-change-the-value-of-a-variable-inside-a-loop-->
+            {% set vars = {'first': True} %}
+            {% for author in authors %}
+                {% if author[0] == title[2] %} <!--ISBN Match-->
+                    {% if vars.first %}
+                        {{first}}
+                        by: <a href="{{ url_for('search', author=author[2]) }}">{{author[1]}}</a>
+                        {% if vars.update({'first': False}) %} {% endif %}
+                        {{first}}
+                    {% else %}
+                         & <a href="{{ url_for('search', author=author[2]) }}">{{author[1]}}</a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %} 
+        </span> 
+        <p>Language: {{ title[3] }}</p>
+        <p>Page Count: {{ title[4] }}</p>
+        <p>Release Date: {{ title[5] }}</p>
+        <p>Category: {{ title[7] }}</p>
+        <p>Page Count: {{ title[10] }}</p>
+    </div>
+</div>

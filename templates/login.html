@@ -1,0 +1,59 @@
+<!--Log in/Sign up page-->
+{% extends 'base.html' %}
+{% block login %}
+<style>
+    .center-block {margin: auto; display: block;}
+    form          { display: table;}
+    p             { display: table-row;}
+    label         { display: table-cell;  text-align: right;}
+    a             { display: table-cell;  text-align: left;}
+    input         { display: table-cell;}
+</style>
+<body>
+    <h1>Log In</h1>
+    <form method="post">
+        <p>
+            <label for="username">Username or Email:&emsp;</label>
+            <input name="username" type="text"> <br> <br>
+        </p>
+        <p>
+            <label for="password">Password:&emsp;</label>
+            <input name="password" type="password">
+        </p>
+        <p>
+            <label for="blank"></label>
+            <a  href="forgotPassword">Forgot your password?</a>  <br> <br>
+        </p>
+        <p>
+            <label for="blank"></label>
+            <input type="submit" name = "Log In" value="Log In">
+        </p>
+
+    <h1>Sign Up</h1>
+        <p>
+            <label for="usernameNew">Username:&emsp;</label>
+            <input name="usernameNew" type="text"> <br> <br>
+        </p>
+        <p>
+            <label for="passwordNew">Password:&emsp;</label>
+            <input name="passwordNew" type="password"> <br> <br>
+        </p>
+        <p>
+            <label for="emailNew">Email:&emsp;</label>
+            <input name="emailNew" type="text"> <br> <br>
+        </p>
+        <p>
+            <label for="fName">First Name:&emsp;</label>
+            <input name="fName" type="text"> <br> <br>
+        </p>
+        <p>
+            <label for="lName">Last Name:&emsp;</label>
+            <input name="lName" type="text"> <br> <br>
+        </p>
+        <p>
+            <label for="blank"></label>
+            <input type="submit" name="Sign Up" value="Sign Up">
+        </p>
+    </form>
+</body>
+{% endblock %}}
