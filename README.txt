@@ -1,6 +1,5 @@
 Library System 
-CMSC 461 Database Project
-Brandon Luton - CL39497
+Database Project for class
 
 Description: A simple database/web app that users can create accounts/sign in, search for books in the database by title, author, or ISBN, and place a hold on a book
 
